@@ -1,0 +1,213 @@
+openapi: 3.0.2
+info:
+  description: REST API Escaperoom
+  title: restcaperoom
+  version: 1.0.0
+servers:
+- url: /
+paths:
+  /:
+    description: The REST endpoint/path used to enter the restcaperoom
+    get:
+      description: Gets the entrance
+      operationId: getentrance
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/door'
+          description: Successful response - returns a `door` entity.
+      summary: Get first door
+      x-openapi-router-controller: openapi_server.controllers.default_controller
+    summary: Path used to manage entrance
+  /doors:
+    description: The REST endpoint/path used to list and create zero or more `door`
+      entities.  This path contains a `GET` and `POST` operation to perform the list
+      and create tasks, respectively.
+    get:
+      description: Gets a list of all `door` entities.
+      operationId: getdoors
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/door'
+                type: array
+          description: Successful response - returns an array of `door` entities.
+      summary: List All doors
+      x-openapi-router-controller: openapi_server.controllers.default_controller
+    summary: Path used to manage the list of doors.
+  /doors/{doorId}:
+    description: The REST endpoint/path used to get, update, and delete single instances
+      of an `door`.  This path contains `GET`, `PUT`, and `DELETE` operations used
+      to perform the get, update, and delete tasks, respectively.
+    get:
+      description: Gets the details of a single instance of a `door`.
+      operationId: getdoor
+      parameters:
+      - description: A unique identifier for a `door`.
+        explode: false
+        in: path
+        name: doorId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Key to open door
+        name: key
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/door'
+          description: Successful response - returns a single `door`.
+      summary: Get a door
+      x-openapi-router-controller: openapi_server.controllers.default_controller
+    summary: Path used to manage a single door.
+  /items:
+    description: The REST endpoint/path used to list and create zero or more `item`
+      entities.  This path contains a `GET` and `POST` operation to perform the list
+      and create tasks, respectively.
+    get:
+      description: Gets a list of all `item` entities.
+      operationId: getitems
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/item'
+                type: array
+          description: Successful response - returns an array of `item` entities.
+      summary: List All items
+      x-openapi-router-controller: openapi_server.controllers.default_controller
+    summary: Path used to manage the list of items.
+  /items/{itemId}:
+    description: The REST endpoint/path used to get, update, and delete single instances
+      of an `item`.  This path contains `GET`, `PUT`, and `DELETE` operations used
+      to perform the get, update, and delete tasks, respectively.
+    get:
+      description: Gets the details of a single instance of a `item`.
+      operationId: getitem
+      parameters:
+      - description: A unique identifier for a `item`.
+        explode: false
+        in: path
+        name: itemId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/item'
+          description: Successful response - returns a single `item`.
+      summary: Get a item
+      x-openapi-router-controller: openapi_server.controllers.default_controller
+    summary: Path used to manage a single item.
+  /rooms:
+    description: The REST endpoint/path used to list and create zero or more `room`
+      entities.  This path contains a `GET` and `POST` operation to perform the list
+      and create tasks, respectively.
+    get:
+      description: Gets a list of all `room` entities.
+      operationId: getrooms
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/room'
+                type: array
+          description: Successful response - returns an array of `room` entities.
+      summary: List All rooms
+      x-openapi-router-controller: openapi_server.controllers.default_controller
+    summary: Path used to manage the list of rooms.
+  /rooms/{roomId}:
+    description: The REST endpoint/path used to get, update, and delete single instances
+      of an `room`.  This path contains `GET`, `PUT`, and `DELETE` operations used
+      to perform the get, update, and delete tasks, respectively.
+    get:
+      description: Gets the details of a single instance of a `room`.
+      operationId: getroom
+      parameters:
+      - description: A unique identifier for a `room`.
+        explode: false
+        in: path
+        name: roomId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/room'
+          description: Successful response - returns a single `room`.
+      summary: Get a room
+      x-openapi-router-controller: openapi_server.controllers.default_controller
+    summary: Path used to manage a single room.
+components:
+  schemas:
+    door:
+      example:
+        panel:
+        - color: green
+      properties:
+        panel:
+          items:
+            $ref: '#/components/schemas/door_panel'
+          type: array
+      title: Root Type for door
+      type: object
+    room:
+      example:
+        items:
+        - i_am_a: table
+          color: brown
+          link: link_to_item
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/room_items'
+          type: array
+      title: Root Type for room
+      type: object
+    item:
+      example:
+        type: table
+        color: green
+      properties:
+        type:
+          type: string
+        color:
+          type: string
+      title: Root Type for item
+      type: object
+    door_panel:
+      properties:
+        color:
+          type: string
+    room_items:
+      properties:
+        type:
+          type: string
+        color:
+          type: string
+        link:
+          type: string

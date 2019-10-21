@@ -1,0 +1,9 @@
+connexion
+swagger-ui-bundle
+python_dateutil
+setuptools >= 21.0.0
+Flask-AuditLog==1.0
+Flask-No-Cache==1.0
+flask
+flask_cors
+
