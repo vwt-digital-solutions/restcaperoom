@@ -1,0 +1,180 @@
+---
+openapi: 3.0.2
+info:
+  title: restcaperoom
+  version: 1.0.0
+  description: REST API Escaperoom
+paths:
+  /doors:
+    summary: Path used to manage the list of doors.
+    description: The REST endpoint/path used to list and create zero or more `door`
+      entities.  This path contains a `GET` and `POST` operation to perform the list
+      and create tasks, respectively.
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/door'
+          description: Successful response - returns an array of `door` entities.
+      operationId: getdoors
+      summary: List All doors
+      description: Gets a list of all `door` entities.
+  /doors/{doorId}:
+    summary: Path used to manage a single door.
+    description: The REST endpoint/path used to get, update, and delete single instances
+      of an `door`.  This path contains `GET`, `PUT`, and `DELETE` operations used
+      to perform the get, update, and delete tasks, respectively.
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/door'
+          description: Successful response - returns a single `door`.
+      operationId: getdoor
+      summary: Get a door
+      description: Gets the details of a single instance of a `door`.
+    parameters:
+    - name: doorId
+      description: A unique identifier for a `door`.
+      schema:
+        type: string
+      in: path
+      required: true
+  /rooms:
+    summary: Path used to manage the list of rooms.
+    description: The REST endpoint/path used to list and create zero or more `room`
+      entities.  This path contains a `GET` and `POST` operation to perform the list
+      and create tasks, respectively.
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/room'
+          description: Successful response - returns an array of `room` entities.
+      operationId: getrooms
+      summary: List All rooms
+      description: Gets a list of all `room` entities.
+  /rooms/{roomId}:
+    summary: Path used to manage a single room.
+    description: The REST endpoint/path used to get, update, and delete single instances
+      of an `room`.  This path contains `GET`, `PUT`, and `DELETE` operations used
+      to perform the get, update, and delete tasks, respectively.
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/room'
+          description: Successful response - returns a single `room`.
+      operationId: getroom
+      summary: Get a room
+      description: Gets the details of a single instance of a `room`.
+    parameters:
+    - name: roomId
+      description: A unique identifier for a `room`.
+      schema:
+        type: string
+      in: path
+      required: true
+  /items:
+    summary: Path used to manage the list of items.
+    description: The REST endpoint/path used to list and create zero or more `item`
+      entities.  This path contains a `GET` and `POST` operation to perform the list
+      and create tasks, respectively.
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/item'
+          description: Successful response - returns an array of `item` entities.
+      operationId: getitems
+      summary: List All items
+      description: Gets a list of all `item` entities.
+  /items/{itemId}:
+    summary: Path used to manage a single item.
+    description: The REST endpoint/path used to get, update, and delete single instances
+      of an `item`.  This path contains `GET`, `PUT`, and `DELETE` operations used
+      to perform the get, update, and delete tasks, respectively.
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/item'
+          description: Successful response - returns a single `item`.
+      operationId: getitem
+      summary: Get a item
+      description: Gets the details of a single instance of a `item`.
+    parameters:
+    - name: itemId
+      description: A unique identifier for a `item`.
+      schema:
+        type: string
+      in: path
+      required: true
+components:
+  schemas:
+    door:
+      title: Root Type for door
+      description: ""
+      type: object
+      properties:
+        panel:
+          type: array
+          items:
+            type: object
+            properties:
+              color:
+                type: string
+      example:
+        panel:
+        - color: green
+    room:
+      title: Root Type for room
+      description: ""
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+              color:
+                type: string
+              link:
+                type: string
+      example:
+        items:
+        - type: table
+          color: brown
+          link: link_to_item
+    item:
+      title: Root Type for item
+      description: ""
+      type: object
+      properties:
+        type:
+          type: string
+        color:
+          type: string
+      example:
+        type: table
+        color: green

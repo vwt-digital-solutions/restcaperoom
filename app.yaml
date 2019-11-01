@@ -1,0 +1,3 @@
+runtime: python37
+env_variables:
+    BASE_URL: "https://restcaperoom-api.test-app.vwtelecom.com"

@@ -1,0 +1,3 @@
+dispatch:
+  - url: "restcaperoom-api.test-app.vwtelecom.com/*"
+    service: default
