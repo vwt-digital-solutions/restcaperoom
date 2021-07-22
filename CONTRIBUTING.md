@@ -1,5 +1,5 @@
-# Contributing to restcaperoom
-Thank you for contributing to restcaperoom! These guidelines might help us understand new issues and enhancements better!
+# Contributing
+Thank you for contributing! These guidelines will help us better understand new issues and enhancements!
 
 ## VWT Digital Guidelines
 Read these guidelines before creating issues or requests.
